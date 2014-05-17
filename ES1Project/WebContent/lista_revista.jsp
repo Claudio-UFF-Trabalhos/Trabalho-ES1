@@ -9,17 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Revistas - cadastrar revista</title>
+    <title>Sistema Revistas - lista de revista</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!-- Add custom CSS here -->
+    <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/validationEngine.jquery.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">    
-    
+	<link href="css/lightbox.css" rel="stylesheet">
+		
   </head>
 
   <body>
@@ -66,59 +65,56 @@
 
         <div class="row">
           <div class="col-lg-12">
-            <h1>Cadastrar Revista <small> Entre com os dados</small></h1>
+            <h1>Lista de Revistas</h1>
           </div>
         </div><!-- /.row -->
         
-		<div class="form-magazine">
-		 		
-	 		<c:if test="${mensagemErro != null}">
-				<div class="errormsgbox">${mensagemErro}</div>
-			</c:if>
-			
-			<c:if test="${mensagemSucesso != null}">
-				<div class="successbox">${mensagemSucesso}</div>
-			</c:if>
-			
-	        <div class="row">
-	          <div class="col-lg-6">
-				
-	            <form class="form" method="post" action="formularioRevista" role="form">
-	
-	              <div class="form-group">
-	                <label class="non-radio-label">Nome da revista: <span class="required-field">* </span></label>
-	                <input name="nome" class="form-control nome" maxlength="100">
-	              </div>
-	              
-	              <div class="form-group">
-	                <label class="non-radio-label">Preço De: <span class="required-field">* </span></label>
-	                <input name="precoDe" class="form-control precoDe" maxlength="10">
-	              </div>
-	
-	              <div class="form-group">
-	                <label class="non-radio-label">Preço Por: <span class="required-field">* </span></label>
-	                <input name="precoPor" class="form-control precoPor" maxlength="10">
-	              </div>
-	
-	              <div class="form-group">
-	                <label class="radio-label">Tem formato digital: <span class="required-field">* </span></label>
-	                <label class="radio-inline">
-	                  <input type="radio" name="temDigital" id="optionsRadiosInline1" value="true" checked> Sim
-	                </label>
-	                <label class="radio-inline">
-	                  <input type="radio" name="temDigital" id="optionsRadiosInline2" value="false">Não
-	                </label>
-	              </div>
-	              
-	              <button type="submit" class="btn btn-default">Cadastrar revista</button>
-	              <button type="reset" class="btn btn-default">Resetar formulário</button>  
-	
-	            </form>         
-	
-	          </div>
-	        </div><!-- /.row -->
-		</div>
+        <c:if test="${mensagemErro != null}">
+			<div class="errormsgbox">${mensagemErro}</div>
+		</c:if>
+		
+		<c:if test="${mensagemSucesso != null}">
+			<div class="successbox">${mensagemSucesso}</div>
+		</c:if>
+     
+          <div class="col-lg-6">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th>id <i class="fa fa-sort"></i></th>
+                    <th>Nome <i class="fa fa-sort"></i></th>
+                    <th>Formato Digital <i class="fa fa-sort"></i></th>
+                    <th>Preço De <i class="fa fa-sort"></i></th>
+                    <th>Preço Por <i class="fa fa-sort"></i></th>
+                    <th>Gerenciar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach items="${revistas}" var="revista" varStatus="status">
+                    <tr>
+                      <td>${revista.id}</td>
+                      <td>${revista.nome}</td>
+                      <c:if test="${revista.temDigital == true}">
+                        <td>Sim</td>	
+                      </c:if>
+                      <c:if test="${revista.temDigital != true}">
+                        <td>Não</td>	
+                      </c:if>
+                      <td>${revista.precoDeFormatado}</td>
+                      <td>${revista.precoPorFormatado}</td>
+                      <td><a class="manage-magazine" href="http://localhost:8080/ES1Project/editaRevista?id=${revista.id}">editar</a>   
+                      <a href="javascript:void(0)" class="manage-magazine" onclick = "summonLightBox('http://localhost:8080/ES1Project/deletaRevista?id=${revista.id}')">excluir</a></td>
+                  </tr>
+                  </c:forEach>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- /.row -->
+
       </div><!-- /#page-wrapper -->
+
 
     </div><!-- /#wrapper -->
 
@@ -126,11 +122,13 @@
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/showhidemenu.js"></script>
-    <script src="js/jquery.mask.min.js"></script>
- 	<script src="js/jquery.validate.min.js"></script>
- 	<script src="js/jquery.validationEngine-pt_BR.js"></script>
- 	<script src="js/jquery.validationEngine.js"></script>
-    <script src="js/validate.revista.js"></script>
-
+    
+    <!-- Page Specific Plugins -->
+    <script src="js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="js/tablesorter/tables.js"></script>
+    <script src="js/lightbox.js"></script>
+  
+ 		<div id="light" class="white_content hidden"></div>
+		<div id="fade" class="black_overlay hidden"></div>
   </body>
 </html>

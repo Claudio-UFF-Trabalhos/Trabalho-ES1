@@ -1263,7 +1263,8 @@ pre code {
     width: 58.333333333333336%;
   }
   .col-lg-6 {
-    width: 50%;
+  	margin-top: 50px;
+    width: 100%;
   }
   .col-lg-5 {
     width: 41.66666666666667%;
@@ -1688,7 +1689,7 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
+  width: 400px;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;

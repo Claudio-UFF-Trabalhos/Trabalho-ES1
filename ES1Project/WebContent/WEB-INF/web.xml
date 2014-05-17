@@ -3,15 +3,44 @@
   <display-name>ES1 Sistema Revistas</display-name>
   
   <servlet>
-    <servlet-name>RevistaServlet</servlet-name>
-    <servlet-class>com.sistema.revistas.controller.RevistaServlet</servlet-class>
+    <servlet-name>FormularioRevistaServlet</servlet-name>
+    <servlet-class>com.sistema.revistas.controller.FormularioRevistaServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>RevistaServlet</servlet-name>
+    <servlet-name>FormularioRevistaServlet</servlet-name>
     <url-pattern>/formularioRevista</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>ListaRevistaServlet</servlet-name>
+    <servlet-class>com.sistema.revistas.controller.ListaRevistaServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ListaRevistaServlet</servlet-name>
+    <url-pattern>/listaRevista</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>EditaRevistaServlet</servlet-name>
+    <servlet-class>com.sistema.revistas.controller.EditaRevistaServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>EditaRevistaServlet</servlet-name>
+    <url-pattern>/editaRevista</url-pattern>
+  </servlet-mapping>  
+ 
+  <servlet>
+    <servlet-name>DeletaRevistaServlet</servlet-name>
+    <servlet-class>com.sistema.revistas.controller.DeletaRevistaServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DeletaRevistaServlet</servlet-name>
+    <url-pattern>/deletaRevista</url-pattern>
+  </servlet-mapping>   
   
 <!--   <servlet> -->  
 <!--     <servlet-name>UserListServlet</servlet-name> -->

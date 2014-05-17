@@ -6,15 +6,12 @@ import com.sistema.revistas.domain.Revista;
 
 public class MapeadorDeResultSet {
 	
-	public Revista mapeiaRevista(ResultSet rs) throws SQLException {
-		Revista revista = new Revista();
-
-		revista.setId(rs.getLong("CD_REVISTA"));
-		revista.setEstaDeletado(rs.getBoolean("BO_ESTA_DELETADO"));
-		revista.setNome(rs.getString("NM_NOME"));
-		revista.setPrecoDe(rs.getBigDecimal("NR_PRECO_DE"));
-		revista.setPrecoPor(rs.getBigDecimal("NR_PRECO_POR"));
-		revista.setTemDigital(rs.getBoolean("BO_TEM_DIGITAL"));
+	public static Revista mapeiaRevista(ResultSet rs) throws SQLException {
+		Revista revista = new Revista(rs.getLong("CD_REVISTA"), 
+									  rs.getString("NM_NOME"), 
+									  rs.getBoolean("BO_TEM_DIGITAL"), 
+									  rs.getBigDecimal("NR_PRECO_DE"), rs.getBigDecimal("NR_PRECO_POR"), 
+									  rs.getBoolean("BO_ESTA_DELETADO"));
 		
 		return revista;
 	}
