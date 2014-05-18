@@ -35,6 +35,9 @@ $(function() {
 			"nome" : {
 				required : true
 			},
+			"tipo" : {
+				required : true
+			},
 			"precoDe" : {
 				required : true,
 				number: true,
@@ -47,6 +50,9 @@ $(function() {
 		},
 		messages : {
 			"nome" : {
+				required : "Este campo é obrigatório.",
+			},
+			"tipo" : {
 				required : "Este campo é obrigatório.",
 			},
 			"precoDe"  : {

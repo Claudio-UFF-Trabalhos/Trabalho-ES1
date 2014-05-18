@@ -4,12 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Home</title>
+<title>Página não encontrada</title>
+<link rel="stylesheet" href="http://localhost:8080/ES1Project/css/erro.css">
 </head>
 <body>
-	<%
-    String redirectURL = "http://localhost:8080/ES1Project/revista/listaRevista";
-    response.sendRedirect(redirectURL);
-	%>
+	<div class="image-container"></div>
 </body>
 </html>

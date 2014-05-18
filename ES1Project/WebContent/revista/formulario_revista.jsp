@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Revistas - editar revista</title>
+    <title>Sistema Revistas - cadastrar revista</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -45,17 +45,17 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" id="menu-top" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> Gerenciar revistas <b class="caret"></b></a>
               <ul id="dropdown-menu-items" class="dropdown-menu">
-                <li><a href="http://localhost:8080/ES1Project/listaRevista"><i class="fa fa-table"></i> Exibir revistas cadastradas</a></li>
-                <li><a href="http://localhost:8080/ES1Project/formularioRevista"><i class="fa fa-edit"></i> Cadastrar nova revista</a></li>
+                <li><a href="http://localhost:8080/ES1Project/revista/listaRevista"><i class="fa fa-table"></i> Exibir revistas cadastradas</a></li>
+                <li><a href="http://localhost:8080/ES1Project/revista/formularioRevista"><i class="fa fa-edit"></i> Cadastrar nova revista</a></li>
               </ul>
             </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Administrador <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${usuario.nome} <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                <li><a href="http://localhost:8080/ES1Project/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
               </ul>
             </li>
           </ul>
@@ -66,75 +66,65 @@
 
         <div class="row">
           <div class="col-lg-12">
-            <h1>Editar Revista <small> Entre com os dados</small></h1>
+            <h1>Cadastrar Revista <small> Entre com os dados</small></h1>
           </div>
         </div><!-- /.row -->
+        
 		<div class="form-magazine">
-		
-			<c:if test="${mensagemErro != null}">
+		 		
+	 		<c:if test="${mensagemErro != null}">
 				<div class="errormsgbox">${mensagemErro}</div>
 			</c:if>
 			
 			<c:if test="${mensagemSucesso != null}">
 				<div class="successbox">${mensagemSucesso}</div>
 			</c:if>
-		
+			
 	        <div class="row">
 	          <div class="col-lg-6">
 				
-	            <form class="form" method="post" action="editaRevista" role="form">
-				  
-				  <input type="hidden" name="id" value="${revista.id}" class="form-control" maxlength="100">
-				  <input type="hidden" name="estaDeletado" value="${revista.estaDeletado}" class="form-control" maxlength="100">
-				  
+	            <form class="form" method="post" action="formularioRevista" role="form">
+	
 	              <div class="form-group">
 	                <label class="non-radio-label">Nome da revista: <span class="required-field">* </span></label>
-	                <input name="nome" value="${revista.nome}" class="form-control nome" maxlength="100">
+	                <input name="nome" autocomplete="off" class="form-control nome" maxlength="100">
+	              </div>
+	              
+	              <div class="form-group">
+	                <label class="non-radio-label">Tipo: <span class="required-field">* </span></label>
+	                <input name="tipo" autocomplete="off" class="form-control tipo" maxlength="100">
+	              </div>
+	              
+	              <div class="form-group">
+	                <label class="non-radio-label">Descrição da revista: </label>
+	                <input name="descricao" autocomplete="off" class="form-control descricao" maxlength="100">
+	              </div>
+	              
+	              <div class="form-group">
+	                <label class="non-radio-label">Preço Por: <span class="required-field">* </span></label>
+	                <input name="precoPor" autocomplete="off" class="form-control precoPor" maxlength="10">
 	              </div>
 	              
 	              <div class="form-group">
 	                <label class="non-radio-label">Preço De: <span class="required-field">* </span></label>
-	                <input name="precoDe" value="${revista.precoDe}" class="form-control precoDe" maxlength="10">
+	                <input name="precoDe" autocomplete="off" class="form-control precoDe" maxlength="10">
 	              </div>
 	
 	              <div class="form-group">
-	                <label class="non-radio-label">Preço Por: <span class="required-field">* </span></label>
-	                <input name="precoPor" value="${revista.precoPor}" class="form-control precoPor" maxlength="10">
+	                <label class="radio-label">Tem formato digital: <span class="required-field">* </span></label>
+	                <label class="radio-inline">
+	                  <input type="radio" name="temDigital" id="optionsRadiosInline1" value="true" checked> Sim
+	                </label>
+	                <label class="radio-inline">
+	                  <input type="radio" name="temDigital" id="optionsRadiosInline2" value="false">Não
+	                </label>
 	              </div>
+	              
+	              <button type="submit" class="btn btn-default">Cadastrar revista</button>
+	              <button type="reset" class="btn btn-default">Resetar formulário</button>  
 	
-				  <c:if test="${revista.temDigital == true}">
-		              <div class="form-group">
-		                <label class="radio-label">Tem formato digital: <span class="required-field">* </span></label>
-		                <label class="radio-inline">
-		                  <input type="radio" name="temDigital" id="optionsRadiosInline1" value="true" checked> Sim
-		                </label>
-		                <label class="radio-inline">
-		                  <input type="radio" name="temDigital" id="optionsRadiosInline2" value="false">Não
-		                </label>
-		              </div>
-		          </c:if>
-
-				  <c:if test="${revista.temDigital != true}">
-		              <div class="form-group">
-		                <label class="radio-label">Tem formato digital: <span class="required-field">* </span></label>
-		                <label class="radio-inline">
-		                  <input type="radio" name="temDigital" id="optionsRadiosInline1" value="true"> Sim
-		                </label>
-		                <label class="radio-inline">
-		                  <input type="radio" name="temDigital" id="optionsRadiosInline2" value="false"  checked> Não
-		                </label>
-		              </div>
-		          </c:if>
-         			
-         		  <c:if test="${revista != null}">	
-	              	<button type="submit" class="btn btn-default">Editar revista</button>
-				  </c:if>	
 	            </form>         
-				
-				<br />
-				<br />
-				<br />
-				<a class="back_button" href="http://localhost:8080/ES1Project/listaRevista">voltar para lista de revistas</a>
+	
 	          </div>
 	        </div><!-- /.row -->
 		</div>

@@ -2,10 +2,8 @@ package com.sistema.revistas.controller.validador;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.sistema.revistas.util.ValidadorDeDigitos;
 
 public class ValidadorDeInput {
@@ -21,8 +19,8 @@ public class ValidadorDeInput {
 		return true;
 	}
 	
-	public static Boolean validaEdicaoDeRevista(String id, String estaDeletado, String nome, String precoDe, String precoPor, String temDigital) {
-		if (validaSeNulos(nome, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
+	public static Boolean validaEdicaoDeRevista(String id, String estaDeletado, String nome, String tipo, String precoDe, String precoPor, String temDigital) {
+		if (validaSeNulos(nome, tipo, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
 			&& validaCamposNumericos(precoDe, precoPor) && validaCampoBooleano(estaDeletado) && ValidadorDeDigitos.validaNumero(id)) {
 			return true;
 		}
@@ -30,8 +28,8 @@ public class ValidadorDeInput {
 		return false;
 	}
 	
-	public static Boolean validaCriacaoDeRevista(String nome, String precoDe, String precoPor, String temDigital) {
-		if (validaSeNulos(nome, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
+	public static Boolean validaCriacaoDeRevista(String nome, String tipo, String precoDe, String precoPor, String temDigital) {
+		if (validaSeNulos(nome, tipo, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
 			&& validaCamposNumericos(precoDe, precoPor)) {
 			return true;
 		}
@@ -41,8 +39,12 @@ public class ValidadorDeInput {
 	
 	private static Boolean validaCamposNumericos(String precoDe, String precoPor) {
 		try {
-			new BigDecimal(precoDe);
-			new BigDecimal(precoPor);
+			BigDecimal precoDeBigDecimal = new BigDecimal(precoDe);
+			BigDecimal precoPorBigDecimal = new BigDecimal(precoPor);
+			
+			if (precoDeBigDecimal.compareTo(precoPorBigDecimal) < 0) {
+				return false;
+			}
 			
 			return true;
 		} catch (Exception e) {
@@ -58,8 +60,8 @@ public class ValidadorDeInput {
 		return true;
 	}
 	
-	private static Boolean validaSeNulos(String nome, String precoDe, String precoPor, String temDigital) {
-		if (nome == null || precoDe == null || precoPor == null || temDigital == null) {
+	private static Boolean validaSeNulos(String nome, String tipo, String precoDe, String precoPor, String temDigital) {
+		if (nome == null || precoDe == null || precoPor == null || temDigital == null || tipo == null) {
 			return false;
 		} 
 		

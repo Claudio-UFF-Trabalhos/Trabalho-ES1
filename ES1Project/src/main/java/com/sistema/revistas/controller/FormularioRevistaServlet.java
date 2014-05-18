@@ -2,12 +2,10 @@ package com.sistema.revistas.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.sistema.revistas.controller.validador.ValidadorDeInput;
 import com.sistema.revistas.domain.Revista;
 import com.sistema.revistas.service.RevistaService;
@@ -33,9 +31,13 @@ public class FormularioRevistaServlet extends HttpServlet {
 		String precoDe = request.getParameter("precoDe");
 		String precoPor = request.getParameter("precoPor");
 		String temDigital = request.getParameter("temDigital");
+		String descricao = request.getParameter("descricao");
+		String tipo = request.getParameter("tipo");
 		
-		if (ValidadorDeInput.validaCriacaoDeRevista(nome, precoDe, precoPor, temDigital)) {
-			Revista revista = new Revista(nome, new Boolean(temDigital), new BigDecimal(precoDe), new BigDecimal(precoPor));
+		if (ValidadorDeInput.validaCriacaoDeRevista(nome, tipo, precoDe, precoPor, temDigital)) {
+			Revista revista = new Revista(nome, new Boolean(temDigital), 
+					                      new BigDecimal(precoDe), new BigDecimal(precoPor),
+					                      descricao, tipo);
 			
 			if (revistaService.criaRevista(revista)) {
 				response.sendRedirect("formularioRevista?success=true");

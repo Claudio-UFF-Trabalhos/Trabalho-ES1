@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,17 +45,17 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" id="menu-top" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> Gerenciar revistas <b class="caret"></b></a>
               <ul id="dropdown-menu-items" class="dropdown-menu">
-                <li><a href="http://localhost:8080/ES1Project/listaRevista"><i class="fa fa-table"></i> Exibir revistas cadastradas</a></li>
-                <li><a href="http://localhost:8080/ES1Project/formularioRevista"><i class="fa fa-edit"></i> Cadastrar nova revista</a></li>
+                <li><a href="http://localhost:8080/ES1Project/revista/listaRevista"><i class="fa fa-table"></i> Exibir revistas cadastradas</a></li>
+                <li><a href="http://localhost:8080/ES1Project/revista/formularioRevista"><i class="fa fa-edit"></i> Cadastrar nova revista</a></li>
               </ul>
             </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Administrador <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${usuario.nome} <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                <li><a href="http://localhost:8080/ES1Project/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
               </ul>
             </li>
           </ul>
@@ -79,39 +80,51 @@
      
           <div class="col-lg-6">
             <div class="table-responsive">
-              <table class="table table-hover table-striped tablesorter">
-                <thead>
-                  <tr>
-                    <th>id <i class="fa fa-sort"></i></th>
-                    <th>Nome <i class="fa fa-sort"></i></th>
-                    <th>Formato Digital <i class="fa fa-sort"></i></th>
-                    <th>Preço De <i class="fa fa-sort"></i></th>
-                    <th>Preço Por <i class="fa fa-sort"></i></th>
-                    <th>Gerenciar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach items="${revistas}" var="revista" varStatus="status">
-                    <tr>
-                      <td>${revista.id}</td>
-                      <td>${revista.nome}</td>
-                      <c:if test="${revista.temDigital == true}">
-                        <td>Sim</td>	
-                      </c:if>
-                      <c:if test="${revista.temDigital != true}">
-                        <td>Não</td>	
-                      </c:if>
-                      <td>${revista.precoDeFormatado}</td>
-                      <td>${revista.precoPorFormatado}</td>
-                      <td><a class="manage-magazine" href="http://localhost:8080/ES1Project/editaRevista?id=${revista.id}">editar</a>   
-                      <a href="javascript:void(0)" class="manage-magazine" onclick = "summonLightBox('http://localhost:8080/ES1Project/deletaRevista?id=${revista.id}')">excluir</a></td>
-                  </tr>
-                  </c:forEach>
-                </tbody>
-              </table>
+            
+             <c:if test="${revistas == null || fn:length(revistas) eq 0}"> 
+               <h4 class="no_magazines">Não há revistas cadastradas.</h4>	
+             </c:if>
+             
+             <c:if test="${revistas != null && fn:length(revistas) gt 0}"> 
+            
+	              <table class="table table-hover table-striped tablesorter">
+	                <thead>
+	                  <tr>
+	                    <th>id <i class="fa fa-sort"></i></th>
+	                    <th>Nome <i class="fa fa-sort"></i></th>
+	                    <th>Tipo <i class="fa fa-sort"></i></th>
+	                    <th>Descrição <i class="fa fa-sort"></i></th>
+	                    <th>Formato Digital <i class="fa fa-sort"></i></th>
+	                    <th>Preço De <i class="fa fa-sort"></i></th>
+	                    <th>Preço Por <i class="fa fa-sort"></i></th>
+	                    <th>Gerenciar</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <c:forEach items="${revistas}" var="revista" varStatus="status">
+	                    <tr>
+	                      <td>${revista.id}</td>
+	                      <td>${revista.nome}</td>
+	                      <td>${revista.tipo}</td>
+	                      <td>${revista.descricao}</td>      
+	                      <c:if test="${revista.temDigital == true}">
+	                        <td>Sim</td>	
+	                      </c:if>
+	                      <c:if test="${revista.temDigital != true}">
+	                        <td>Não</td>	
+	                      </c:if>
+	                      <td>${revista.precoDeFormatado}</td>
+	                      <td>${revista.precoPorFormatado}</td>
+	                      <td><a class="manage-magazine" href="http://localhost:8080/ES1Project/revista/editaRevista?id=${revista.id}">editar</a>   
+	                      <a href="javascript:void(0)" class="manage-magazine" onclick = "summonLightBox('http://localhost:8080/ES1Project/revista/deletaRevista?id=${revista.id}')">excluir</a></td>
+	                  </tr>
+	                  </c:forEach>
+	                </tbody>
+	              </table>
+	              
+	           </c:if>
             </div>
           </div>
-        </div><!-- /.row -->
 
       </div><!-- /#page-wrapper -->
 

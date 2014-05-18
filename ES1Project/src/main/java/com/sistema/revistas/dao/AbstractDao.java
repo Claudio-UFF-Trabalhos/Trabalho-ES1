@@ -1,7 +1,6 @@
 package com.sistema.revistas.dao;
 
 import java.util.List;
-
 import com.sistema.revistas.dao.datasource.DataSource;
 
 public abstract class AbstractDao<T> {

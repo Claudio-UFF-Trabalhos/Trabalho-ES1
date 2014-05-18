@@ -1,0 +1,15 @@
+hrml, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.image-container {
+	margin: auto;
+	width: 1041px;
+	height: 694px;
+	background-image: url(http://localhost:8080/ES1Project/img/404-Error.jpg);
+	background-size:1041px 694px;
+	background-repeat: no-repeat;
+	background-position: auto auto;
+}

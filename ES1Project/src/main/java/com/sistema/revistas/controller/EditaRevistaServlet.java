@@ -45,14 +45,18 @@ public class EditaRevistaServlet extends HttpServlet {
 		String precoPor = request.getParameter("precoPor");
 		String temDigital = request.getParameter("temDigital");
 		String estaDeletado = request.getParameter("estaDeletado");
+		String descricao = request.getParameter("descricao");
+		String tipo = request.getParameter("tipo");
 		
-		if (ValidadorDeInput.validaEdicaoDeRevista(id, estaDeletado, nome, precoDe, precoPor, temDigital)) {
+		if (ValidadorDeInput.validaEdicaoDeRevista(id, estaDeletado, nome, tipo, precoDe, precoPor, temDigital)) {
 			Revista revista = new Revista(new Long(id), 
 										  nome, 
 										  new Boolean(temDigital), 
 										  new BigDecimal(precoDe), 
 										  new BigDecimal(precoPor), 
-										  new Boolean(estaDeletado));
+										  new Boolean(estaDeletado), 
+										  descricao,
+										  tipo);
 			
 			if (revistaService.atualizaRevista(revista)) {
 				response.sendRedirect("editaRevista?id=" + revista.getId() + "&success=true");

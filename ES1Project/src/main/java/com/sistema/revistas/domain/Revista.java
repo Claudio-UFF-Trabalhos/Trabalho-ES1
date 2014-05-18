@@ -1,7 +1,6 @@
 package com.sistema.revistas.domain;
 
 import java.math.BigDecimal;
-
 import com.sistema.revistas.util.FormatadorDeValores;
 
 public class Revista {
@@ -17,20 +16,25 @@ public class Revista {
 	
 	public Revista() {}
 	
-	public Revista(Long id, String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor, Boolean estaDeletado) {
+	public Revista(Long id, String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor, 
+			       Boolean estaDeletado, String descricao, String tipo) {
 		this.id = id;
 		this.nome = nome;
 		this.temDigital = temDigital;
 		this.precoDe = precoDe;
 		this.precoPor = precoPor;
 		this.estaDeletado = estaDeletado;
+		this.tipo = tipo;
+		this.descricao = descricao;
 	}
 	
-	public Revista(String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor) {
+	public Revista(String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor, String descricao, String tipo) {
 		this.nome = nome;
 		this.temDigital = temDigital;
 		this.precoDe = precoDe;
 		this.precoPor = precoPor;
+		this.tipo = tipo;
+		this.descricao = descricao;
 		estaDeletado = false;
 	}
 	
