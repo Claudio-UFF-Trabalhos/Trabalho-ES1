@@ -19,8 +19,8 @@
   </div>
   <div class="login-form">
 	  
-	  <c:if test="${mensagemErro != null}">
-	  	<div class="errormsgbox">${mensagemErro}</div>
+	  <c:if test="${mensagem != null && mensagem.tipo eq 'mensagemErro'}">
+	  	<div class="errormsgbox">${mensagem.texto}</div>
 	  </c:if>
 	  
 	  <form method="post" action="login" class="login">

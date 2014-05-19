@@ -70,12 +70,11 @@
           </div>
         </div><!-- /.row -->
         
-        <c:if test="${mensagemErro != null}">
-			<div class="errormsgbox">${mensagemErro}</div>
+		<c:if test="${mensagem != null && mensagem.tipo eq 'mensagemErro'}">
+			<div class="errormsgbox">${mensagem.texto}</div>
 		</c:if>
-		
-		<c:if test="${mensagemSucesso != null}">
-			<div class="successbox">${mensagemSucesso}</div>
+		<c:if test="${mensagem != null && mensagem.tipo eq 'mensagemSucesso'}">
+			<div class="successbox">${mensagem.texto}</div>
 		</c:if>
      
           <div class="col-lg-6">

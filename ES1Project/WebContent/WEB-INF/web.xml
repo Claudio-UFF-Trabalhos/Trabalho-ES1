@@ -64,7 +64,7 @@
   
   <filter>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>com.sistema.revistas.controller.filter.LoginFilter</filter-class>
+    <filter-class>com.sistema.revistas.controller.filtro.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>

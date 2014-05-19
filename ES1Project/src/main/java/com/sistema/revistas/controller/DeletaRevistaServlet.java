@@ -2,14 +2,14 @@ package com.sistema.revistas.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sistema.revistas.controller.mensagem.Mensagem;
 import com.sistema.revistas.controller.validador.ValidadorDeInput;
 import com.sistema.revistas.domain.Revista;
 import com.sistema.revistas.service.RevistaService;
 
-public class DeletaRevistaServlet extends HttpServlet {
+public class DeletaRevistaServlet extends BaseServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private RevistaService revistaService;
@@ -19,23 +19,24 @@ public class DeletaRevistaServlet extends HttpServlet {
     	revistaService = RevistaService.getInstanciaDeRevistaService();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String parametroId = request.getParameter("id");	
-		
-		if (!ValidadorDeInput.validaId(request, response, parametroId)) {
-			response.sendRedirect("listaRevista?success=false");
-			return;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		if (!ValidadorDeInput.validaId(request)) {
+			request.setAttribute("mensagem", Mensagem.erroIdInvalidoFactory());
+		} else {
+			Long id = new Long(request.getParameter("id"));
+			Revista revista = revistaService.consultaRevistaPorId(id);
+			excluiRevista(request, revista);
 		}
-				
-		Long id = new Long(parametroId);
-		Revista revista = revistaService.consultaRevistaPorId(id);
 		
+		response.sendRedirect("listaRevista?mensagem=true");
+	}
+
+	private void excluiRevista(HttpServletRequest request, Revista revista) {
 		if (revista != null && revistaService.excluiRevista(revista)) {
-			response.sendRedirect("listaRevista?success=true");
-			return;
+			request.getSession().setAttribute("mensagem", Mensagem.deletarComSucessoFactory());
+		} else {
+			request.getSession().setAttribute("mensagem", Mensagem.deletarComErroFactory());
 		}
-		
-		response.sendRedirect("listaRevista?success=false");
 	}
 
 }

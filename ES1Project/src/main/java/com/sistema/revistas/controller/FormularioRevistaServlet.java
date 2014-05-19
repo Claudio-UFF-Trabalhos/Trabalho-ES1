@@ -3,14 +3,14 @@ package com.sistema.revistas.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sistema.revistas.controller.mensagem.Mensagem;
 import com.sistema.revistas.controller.validador.ValidadorDeInput;
 import com.sistema.revistas.domain.Revista;
 import com.sistema.revistas.service.RevistaService;
 
-public class FormularioRevistaServlet extends HttpServlet {
+public class FormularioRevistaServlet extends BaseServlet{
 	
 	private static final long serialVersionUID = 1L;
 	private RevistaService revistaService;
@@ -21,45 +21,27 @@ public class FormularioRevistaServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		criaMensagem(request);
-
-		response.sendRedirect("formulario_revista.jsp");
+		renderizaJSP(request, response, "formulario_revista.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String precoDe = request.getParameter("precoDe");
-		String precoPor = request.getParameter("precoPor");
-		String temDigital = request.getParameter("temDigital");
-		String descricao = request.getParameter("descricao");
-		String tipo = request.getParameter("tipo");
-		
-		if (ValidadorDeInput.validaCriacaoDeRevista(nome, tipo, precoDe, precoPor, temDigital)) {
-			Revista revista = new Revista(nome, new Boolean(temDigital), 
-					                      new BigDecimal(precoDe), new BigDecimal(precoPor),
-					                      descricao, tipo);
+		if (ValidadorDeInput.validaCriacaoDeRevista(request)) {
+			Revista revista = new Revista.RevistaBuilder().nome(request.getParameter("nome")).
+					temDigital(new Boolean(request.getParameter("temDigital"))).precoPor(new BigDecimal(request.getParameter("precoPor"))).
+					precoDe(new BigDecimal(request.getParameter("precoDe"))).descricao(request.getParameter("descricao")).
+					tipo(request.getParameter("tipo")).build();
 			
-			if (revistaService.criaRevista(revista)) {
-				response.sendRedirect("formularioRevista?success=true");
-				return;
-			} 
+			cadastraRevista(request, revista);
 		} 
-		
-		response.sendRedirect("formularioRevista?success=false");
+				
+		response.sendRedirect("formularioRevista?mensagem=true");
 	}
-	
-	private void criaMensagem(HttpServletRequest request) {
-		String mensagem = request.getParameter("success");
-		
-		if (mensagem != null && Boolean.TRUE.toString().equals(mensagem)) {
-			request.getSession().setAttribute("mensagemSucesso", "Revista cadastrada com sucesso.");
-			request.getSession().setAttribute("mensagemErro", null);
-		} else if (mensagem != null && Boolean.FALSE.toString().equals(mensagem)) {
-			request.getSession().setAttribute("mensagemErro", "Erro ao cadastrar revista.");
-			request.getSession().setAttribute("mensagemSucesso", null);
+
+	private void cadastraRevista(HttpServletRequest request, Revista revista) {
+		if (revistaService.criaRevista(revista)) {
+			request.getSession().setAttribute("mensagem", Mensagem.cadastrarComSucessoFactory());
 		} else {
-			request.getSession().setAttribute("mensagemSucesso", null);
-			request.getSession().setAttribute("mensagemErro", null);
+			request.getSession().setAttribute("mensagem", Mensagem.cadastrarComErroFactory());
 		}
 	}
 

@@ -14,28 +14,72 @@ public class Revista {
 	private BigDecimal precoPor;
 	private Boolean estaDeletado;
 	
-	public Revista() {}
-	
-	public Revista(Long id, String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor, 
-			       Boolean estaDeletado, String descricao, String tipo) {
-		this.id = id;
-		this.nome = nome;
-		this.temDigital = temDigital;
-		this.precoDe = precoDe;
-		this.precoPor = precoPor;
-		this.estaDeletado = estaDeletado;
-		this.tipo = tipo;
-		this.descricao = descricao;
+	public static class RevistaBuilder {
+		
+		private Long id;
+		private String nome;
+		private Boolean temDigital;
+		private String tipo;
+		private String descricao;
+		private BigDecimal precoDe;
+		private BigDecimal precoPor;
+		private Boolean estaDeletado = false;
+		
+		public RevistaBuilder id(Long val) {
+			id = val;
+			return this;
+		}
+		
+		public RevistaBuilder nome(String val) {
+			nome = val;
+			return this;
+		}
+		
+		public RevistaBuilder temDigital(Boolean val) {
+			temDigital = val;
+			return this;
+		}
+		
+		public RevistaBuilder tipo(String val) {
+			tipo = val;
+			return this;
+		}
+		
+		public RevistaBuilder descricao(String val) {
+			descricao = val;
+			return this;
+		}
+		
+		public RevistaBuilder precoDe(BigDecimal val) {
+			precoDe = val;
+			return this;
+		}
+		
+		public RevistaBuilder precoPor(BigDecimal val) {
+			precoPor = val;
+			return this;
+		}
+		
+		public RevistaBuilder estaDeletado(Boolean val) {
+			estaDeletado = val;
+			return this;
+		}
+		
+		public Revista build() {
+			return new Revista(this);
+		}
+		
 	}
-	
-	public Revista(String nome, Boolean temDigital, BigDecimal precoDe, BigDecimal precoPor, String descricao, String tipo) {
-		this.nome = nome;
-		this.temDigital = temDigital;
-		this.precoDe = precoDe;
-		this.precoPor = precoPor;
-		this.tipo = tipo;
-		this.descricao = descricao;
-		estaDeletado = false;
+
+	public Revista(RevistaBuilder revistaBuilder) {
+		this.nome = revistaBuilder.nome;
+		this.id = revistaBuilder.id;
+		this.temDigital = revistaBuilder.temDigital;
+		this.tipo = revistaBuilder.tipo;
+		this.descricao = revistaBuilder.descricao;
+		this.precoDe = revistaBuilder.precoDe;
+		this.precoPor = revistaBuilder.precoPor;
+		this.estaDeletado = revistaBuilder.estaDeletado;
 	}
 	
 	public Long getId() {

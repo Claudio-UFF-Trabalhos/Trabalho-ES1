@@ -1,43 +1,41 @@
 package com.sistema.revistas.controller.validador;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import com.sistema.revistas.util.ValidadorDeDigitos;
 
 public class ValidadorDeInput {
 
-	public static Boolean validaId(HttpServletRequest request, HttpServletResponse response, String id)	throws IOException {
-		if (!ValidadorDeDigitos.validaNumero(id)) {
-			request.getSession().setAttribute("mensagemSucesso", null);
-			request.getSession().setAttribute("mensagemErro", "Id da revista inválido.");
-			
+	public static Boolean validaId(HttpServletRequest request) {
+		if (!ValidadorDeDigitos.validaNumero(request.getParameter("id"))) {
 			return false;
 		}
 		
 		return true;
 	}
 	
-	public static Boolean validaEdicaoDeRevista(String id, String estaDeletado, String nome, String tipo, String precoDe, String precoPor, String temDigital) {
-		if (validaSeNulos(nome, tipo, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
-			&& validaCamposNumericos(precoDe, precoPor) && validaCampoBooleano(estaDeletado) && ValidadorDeDigitos.validaNumero(id)) {
+	public static Boolean validaEdicaoDeRevista(HttpServletRequest request) {
+		if (validaCamposObrigatoriosDeRevista(request) && validaCamposBooleano(request.getParameter("temDigital")) 
+			&& validaPrecos(request.getParameter("precoDe"), request.getParameter("precoPor")) && 
+			validaCamposBooleano(request.getParameter("estaDeletado")) && ValidadorDeDigitos.validaNumero(request.getParameter("id"))) {
+			
 			return true;
 		}
 		
 		return false;
 	}
 	
-	public static Boolean validaCriacaoDeRevista(String nome, String tipo, String precoDe, String precoPor, String temDigital) {
-		if (validaSeNulos(nome, tipo, precoDe, precoPor, temDigital) && validaCampoBooleano(temDigital) 
-			&& validaCamposNumericos(precoDe, precoPor)) {
+	public static Boolean validaCriacaoDeRevista(HttpServletRequest request) {
+		if (validaCamposObrigatoriosDeRevista(request) &&  validaCamposBooleano(request.getParameter("temDigital")) 
+			&& validaPrecos(request.getParameter("precoDe"), request.getParameter("precoPor"))) {
+		
 			return true;
 		}
 		
 		return false;
 	}
 	
-	private static Boolean validaCamposNumericos(String precoDe, String precoPor) {
+	private static Boolean validaPrecos(String precoDe, String precoPor) {
 		try {
 			BigDecimal precoDeBigDecimal = new BigDecimal(precoDe);
 			BigDecimal precoPorBigDecimal = new BigDecimal(precoPor);
@@ -52,7 +50,7 @@ public class ValidadorDeInput {
 		}
 	}
 	
-	private static Boolean validaCampoBooleano(String temDigital) {
+	private static Boolean validaCamposBooleano(String temDigital) {
 		if (!Boolean.TRUE.toString().equals(temDigital) && !Boolean.FALSE.toString().equals(temDigital)) {
 			return false;
 		}
@@ -60,12 +58,9 @@ public class ValidadorDeInput {
 		return true;
 	}
 	
-	private static Boolean validaSeNulos(String nome, String tipo, String precoDe, String precoPor, String temDigital) {
-		if (nome == null || precoDe == null || precoPor == null || temDigital == null || tipo == null) {
-			return false;
-		} 
-		
-		return true;
+	private static Boolean validaCamposObrigatoriosDeRevista(HttpServletRequest request) {
+		return request.getParameter("nome") != null && request.getParameter("tipo") != null && request.getParameter("precoDe") != null && 
+			   request.getParameter("precoPor") != null && request.getParameter("temDigital") != null;
 	}
 	
 }

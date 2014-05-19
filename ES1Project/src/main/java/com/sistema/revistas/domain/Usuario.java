@@ -12,18 +12,58 @@ public class Usuario {
 	private Boolean usuarioGerente;
 	private Boolean estaDeletado;
 	
-	public Usuario(String nome, String senha) {
-		this.nome = nome;
-		this.senha = tornaSenhaSegura(senha);
+	public static class UsuarioBuilder {
+		
+		private Long id;
+		private String nome;
+		private String sobrenome;
+		private String senha;
+		private Boolean usuarioGerente;
+		private Boolean estaDeletado = false;
+		
+		public UsuarioBuilder id(Long val) {
+			id = val;
+			return this;
+		}
+		
+		public UsuarioBuilder nome(String val) {
+			nome = val;
+			return this;
+		}
+		
+		public UsuarioBuilder estaDeletado(Boolean val) {
+			estaDeletado = val;
+			return this;
+		}
+		
+		public UsuarioBuilder sobrenome(String val) {
+			sobrenome = val;
+			return this;
+		}
+		
+		public UsuarioBuilder senha(String val) {
+			senha = val;
+			return this;
+		}
+		
+		public UsuarioBuilder usuarioGerente(Boolean val) {
+			usuarioGerente = val;
+			return this;
+		}
+		
+		public Usuario build() {
+			return new Usuario(this);
+		}
+		
 	}
 	
-	public Usuario(String nome, String sobrenome, String senha, Boolean usuarioGerente, Long id, Boolean estaDeletado) {
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.senha = tornaSenhaSegura(senha);
-		this.usuarioGerente = usuarioGerente;
-		this.id = id;
-		this.estaDeletado = estaDeletado;
+	public Usuario(UsuarioBuilder usuarioBuilder) {
+		this.id = usuarioBuilder.id;
+		this.nome = usuarioBuilder.nome;
+		this.sobrenome = usuarioBuilder.sobrenome;
+		this.senha = tornaSenhaSegura(usuarioBuilder.senha);
+		this.usuarioGerente = usuarioBuilder.usuarioGerente;
+		this.estaDeletado = usuarioBuilder.estaDeletado;
 	}
 	
 	private String tornaSenhaSegura(String senhaParaHash){

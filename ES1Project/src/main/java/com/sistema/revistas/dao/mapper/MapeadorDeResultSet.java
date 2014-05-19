@@ -8,25 +8,18 @@ import com.sistema.revistas.domain.Usuario;
 public class MapeadorDeResultSet {
 	
 	public static Usuario mapeiaUsuario(ResultSet rs) throws SQLException {
-		Usuario usuario = new Usuario(rs.getString("NM_NOME"), 
-									  rs.getString("NM_SOBRENOME"), 
-									  rs.getString("NM_SENHA"), 
-									  rs.getBoolean("BO_E_GERENTE"), 
-									  rs.getLong("CD_USUARIO"), 
-									  rs.getBoolean("BO_ESTA_DELETADO"));
+		Usuario usuario = new Usuario.UsuarioBuilder().nome(rs.getString("NM_NOME")).sobrenome(rs.getString("NM_SOBRENOME")).
+				senha(rs.getString("NM_SENHA")).usuarioGerente(rs.getBoolean("BO_E_GERENTE")).id(rs.getLong("CD_USUARIO")).
+				estaDeletado(rs.getBoolean("BO_ESTA_DELETADO")).build();
 		
 		return usuario;
 	}
 	
 	public static Revista mapeiaRevista(ResultSet rs) throws SQLException {
-		Revista revista = new Revista(rs.getLong("CD_REVISTA"), 
-									  rs.getString("NM_NOME"), 
-									  rs.getBoolean("BO_TEM_DIGITAL"), 
-									  rs.getBigDecimal("NR_PRECO_DE"), 
-									  rs.getBigDecimal("NR_PRECO_POR"), 
-									  rs.getBoolean("BO_ESTA_DELETADO"),
-									  rs.getString("NM_DESCRICAO"),
-									  rs.getString("NM_TIPO"));
+		Revista revista = new Revista.RevistaBuilder().id(rs.getLong("CD_REVISTA")).nome(rs.getString("NM_NOME")).
+				temDigital(rs.getBoolean("BO_TEM_DIGITAL")).precoDe(rs.getBigDecimal("NR_PRECO_DE")).
+				precoPor(rs.getBigDecimal("NR_PRECO_POR")).estaDeletado(rs.getBoolean("BO_ESTA_DELETADO")).descricao(rs.getString("NM_DESCRICAO")).
+				tipo(rs.getString("NM_TIPO")).build();
 		
 		return revista;
 	}
