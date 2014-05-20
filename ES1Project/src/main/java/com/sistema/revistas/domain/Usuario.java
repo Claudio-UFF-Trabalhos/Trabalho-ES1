@@ -66,8 +66,8 @@ public class Usuario {
 		this.estaDeletado = usuarioBuilder.estaDeletado;
 	}
 	
-	private String tornaSenhaSegura(String senhaParaHash){
-		String salt = "sistemarevista";
+	private String tornaSenhaSegura(String senhaParaHash) {
+		String salt = "sistemarevista"; 
         String senhaGerada = null;
         
         try {
@@ -82,9 +82,8 @@ public class Usuario {
             }
             
             senhaGerada = sb.toString();
-        } 
-        catch (NoSuchAlgorithmException e) {
-        	e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
         
         return senhaGerada;
