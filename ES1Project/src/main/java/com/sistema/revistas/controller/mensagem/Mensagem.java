@@ -49,5 +49,9 @@ public class Mensagem {
 	public static Mensagem erroIdInvalidoFactory() {
 		return new Mensagem("mensagemErro", "Id de revista inválido.");
 	}
+	
+	public static Mensagem mensagemNulaFactory() {
+		return null;
+	}
 
 }

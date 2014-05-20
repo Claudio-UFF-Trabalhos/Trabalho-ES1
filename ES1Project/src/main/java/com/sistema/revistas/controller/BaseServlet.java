@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sistema.revistas.controller.mensagem.Mensagem;
 
 public abstract class BaseServlet extends HttpServlet {
 
@@ -11,7 +12,7 @@ public abstract class BaseServlet extends HttpServlet {
 
 	public void renderizaJSP(HttpServletRequest request, HttpServletResponse response, String urlPagina) throws IOException {
 		if (request.getParameter("mensagem") == null) {
-			request.getSession().setAttribute("mensagem", null);
+			request.getSession().setAttribute("mensagem", Mensagem.mensagemNulaFactory());
 		}
 		
 		response.sendRedirect(urlPagina);
