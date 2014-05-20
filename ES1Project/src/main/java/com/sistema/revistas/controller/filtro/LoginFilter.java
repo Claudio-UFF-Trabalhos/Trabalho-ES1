@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sistema.revistas.domain.Usuario;
 
 public class LoginFilter implements Filter {
 
@@ -20,7 +21,9 @@ public class LoginFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
-		if (httpRequest.getSession().getAttribute("usuario") == null) {
+		Usuario usuario = (Usuario) httpRequest.getSession().getAttribute("usuario");
+		
+		if (usuario == null) {
 			httpResponse.sendRedirect("http://localhost:8080/ES1Project/login");
 		} else {
 			chain.doFilter(request, response);
