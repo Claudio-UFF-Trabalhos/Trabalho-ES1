@@ -8,7 +8,7 @@ public class Revista {
 	private Long id;
 	private String nome;
 	private Boolean temDigital;
-	private String tipo;
+	private String tema;
 	private String descricao;
 	private BigDecimal precoDe;
 	private BigDecimal precoPor;
@@ -19,7 +19,7 @@ public class Revista {
 		private Long id;
 		private String nome;
 		private Boolean temDigital;
-		private String tipo;
+		private String tema;
 		private String descricao;
 		private BigDecimal precoDe;
 		private BigDecimal precoPor;
@@ -40,8 +40,8 @@ public class Revista {
 			return this;
 		}
 		
-		public RevistaBuilder tipo(String val) {
-			tipo = val;
+		public RevistaBuilder tema(String val) {
+			tema = val;
 			return this;
 		}
 		
@@ -75,7 +75,7 @@ public class Revista {
 		this.nome = revistaBuilder.nome;
 		this.id = revistaBuilder.id;
 		this.temDigital = revistaBuilder.temDigital;
-		this.tipo = revistaBuilder.tipo;
+		this.tema = revistaBuilder.tema;
 		this.descricao = revistaBuilder.descricao;
 		this.precoDe = revistaBuilder.precoDe;
 		this.precoPor = revistaBuilder.precoPor;
@@ -90,8 +90,8 @@ public class Revista {
 		return nome;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public String getTema() {
+		return tema;
 	}
 	
 	public String getDescricao() {

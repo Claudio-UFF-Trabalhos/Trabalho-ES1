@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,7 +91,7 @@
 	                  <tr>
 	                    <th>id <i class="fa fa-sort"></i></th>
 	                    <th>Nome <i class="fa fa-sort"></i></th>
-	                    <th>Tipo <i class="fa fa-sort"></i></th>
+	                    <th>Tema <i class="fa fa-sort"></i></th>
 	                    <th>Descrição <i class="fa fa-sort"></i></th>
 	                    <th>Formato Digital <i class="fa fa-sort"></i></th>
 	                    <th>Preço De <i class="fa fa-sort"></i></th>
@@ -104,7 +104,7 @@
 	                    <tr>
 	                      <td>${revista.id}</td>
 	                      <td>${revista.nome}</td>
-	                      <td>${revista.tipo}</td>
+	                      <td>${revista.tema}</td>
 	                      <td>${revista.descricao}</td>      
 	                      <c:if test="${revista.temDigital == true}">
 	                        <td>Sim</td>	

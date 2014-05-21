@@ -19,7 +19,7 @@ public class MapeadorDeResultSet {
 		Revista revista = new Revista.RevistaBuilder().id(rs.getLong("CD_REVISTA")).nome(rs.getString("NM_NOME")).
 				temDigital(rs.getBoolean("BO_TEM_DIGITAL")).precoDe(rs.getBigDecimal("NR_PRECO_DE")).
 				precoPor(rs.getBigDecimal("NR_PRECO_POR")).estaDeletado(rs.getBoolean("BO_ESTA_DELETADO")).descricao(rs.getString("NM_DESCRICAO")).
-				tipo(rs.getString("NM_TIPO")).build();
+				tema(rs.getString("NM_TEMA")).build();
 		
 		return revista;
 	}

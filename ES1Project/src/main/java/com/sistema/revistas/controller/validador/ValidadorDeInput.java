@@ -59,7 +59,7 @@ public class ValidadorDeInput {
 	}
 	
 	private static Boolean validaCamposObrigatoriosDeRevista(HttpServletRequest request) {
-		return request.getParameter("nome") != null && request.getParameter("tipo") != null && request.getParameter("precoDe") != null && 
+		return request.getParameter("nome") != null && request.getParameter("tema") != null && request.getParameter("precoDe") != null && 
 			   request.getParameter("precoPor") != null && request.getParameter("temDigital") != null;
 	}
 	

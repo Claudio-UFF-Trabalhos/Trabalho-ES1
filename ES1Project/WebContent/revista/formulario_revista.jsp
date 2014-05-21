@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,8 +90,8 @@
 	              </div>
 	              
 	              <div class="form-group">
-	                <label class="non-radio-label">Tipo: <span class="required-field">* </span></label>
-	                <input name="tipo" autocomplete="off" class="form-control tipo" maxlength="100">
+	                <label class="non-radio-label">Tema: <span class="required-field">* </span></label>
+	                <input name="tema" autocomplete="off" class="form-control tema" maxlength="100">
 	              </div>
 	              
 	              <div class="form-group">

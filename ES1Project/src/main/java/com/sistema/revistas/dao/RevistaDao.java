@@ -40,7 +40,7 @@ public class RevistaDao extends AbstractDao<Revista> {
 			Connection connection = DriverManager.getConnection(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
 			
 			String sql = "INSERT INTO REVISTA (NM_NOME, BO_TEM_DIGITAL, NR_PRECO_DE, NR_PRECO_POR, " + 
-			"BO_ESTA_DELETADO, NM_DESCRICAO, NM_TIPO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			"BO_ESTA_DELETADO, NM_DESCRICAO, NM_TEMA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement statement = connection.prepareStatement(sql);
 			
@@ -50,7 +50,7 @@ public class RevistaDao extends AbstractDao<Revista> {
 			statement.setBigDecimal(4, revista.getPrecoPor());
 			statement.setBoolean(5, revista.getEstaDeletado());
 			statement.setString(6, revista.getDescricao());
-			statement.setString(7, revista.getTipo());
+			statement.setString(7, revista.getTema());
 
 			statement.execute();
 			
@@ -72,7 +72,7 @@ public class RevistaDao extends AbstractDao<Revista> {
 			Connection connection = DriverManager.getConnection(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
 			
 			String sql = "UPDATE REVISTA SET NM_NOME = ?, BO_TEM_DIGITAL = ?, NR_PRECO_DE = ?, NR_PRECO_POR = ?, BO_ESTA_DELETADO = ?,"
-					+ "NM_DESCRICAO = ?, NM_TIPO = ? WHERE CD_REVISTA = ?"; 
+					+ "NM_DESCRICAO = ?, NM_TEMA = ? WHERE CD_REVISTA = ?"; 
 			
 			PreparedStatement statement = connection.prepareStatement(sql);
 			
@@ -82,7 +82,7 @@ public class RevistaDao extends AbstractDao<Revista> {
 			statement.setBigDecimal(4, revista.getPrecoPor());
 			statement.setBoolean(5, revista.getEstaDeletado());
 			statement.setString(6, revista.getDescricao());
-			statement.setString(7, revista.getTipo());
+			statement.setString(7, revista.getTema());
 			statement.setLong(8, revista.getId());
 			
 			statement.execute();

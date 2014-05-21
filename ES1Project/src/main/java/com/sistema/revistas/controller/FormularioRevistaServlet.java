@@ -29,7 +29,7 @@ public class FormularioRevistaServlet extends BaseServlet{
 			Revista revista = new Revista.RevistaBuilder().nome(request.getParameter("nome")).
 					temDigital(new Boolean(request.getParameter("temDigital"))).precoPor(new BigDecimal(request.getParameter("precoPor"))).
 					precoDe(new BigDecimal(request.getParameter("precoDe"))).descricao(request.getParameter("descricao")).
-					tipo(request.getParameter("tipo")).build();
+					tema(request.getParameter("tema")).build();
 			
 			cadastraRevista(request, revista);
 		} 

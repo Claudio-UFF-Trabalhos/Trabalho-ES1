@@ -35,7 +35,7 @@ $(function() {
 			"nome" : {
 				required : true
 			},
-			"tipo" : {
+			"tema" : {
 				required : true
 			},
 			"precoDe" : {
@@ -52,7 +52,7 @@ $(function() {
 			"nome" : {
 				required : "Este campo é obrigatório.",
 			},
-			"tipo" : {
+			"tema" : {
 				required : "Este campo é obrigatório.",
 			},
 			"precoDe"  : {

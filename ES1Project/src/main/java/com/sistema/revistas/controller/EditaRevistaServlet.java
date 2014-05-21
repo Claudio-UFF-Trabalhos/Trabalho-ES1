@@ -37,7 +37,7 @@ public class EditaRevistaServlet extends BaseServlet {
 			Revista revista = new Revista.RevistaBuilder().id(new Long(request.getParameter("id"))).nome(request.getParameter("nome")).
 					temDigital(new Boolean(request.getParameter("temDigital"))).precoDe(new BigDecimal(request.getParameter("precoDe"))).
 					precoPor(new BigDecimal(request.getParameter("precoPor"))).estaDeletado(new Boolean(request.getParameter("estaDeletado"))).
-					descricao(request.getParameter("descricao")).tipo(request.getParameter("tipo")).build();
+					descricao(request.getParameter("descricao")).tema(request.getParameter("tema")).build();
 			
 			editaRevista(request, revista);
 		}
