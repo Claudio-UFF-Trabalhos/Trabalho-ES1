@@ -14,7 +14,7 @@ import com.sistema.revistas.dao.datasource.DataSource;
 import com.sistema.revistas.dao.mapper.MapeadorDeResultSet;
 import com.sistema.revistas.util.CarregadorDePropriedades;
 
-public class UsuarioDao extends AbstractDao<Usuario> {
+public class UsuarioDao extends GenericDao<Usuario> {
 	
 	private static class Loader {
 		private static UsuarioDao usuarioDaoInstancia = new UsuarioDao();
